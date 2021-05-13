@@ -5,7 +5,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
 const generateMarkdown = require("./utils/generateMarkdown.js");
-const licenseArr = ["MIT", "GNU GPLv3", "ISC"];
+const licenseArr = ["MIT", "GNUGPLv3", "ISC"];
 
 const readMe = [
   {
@@ -20,14 +20,13 @@ const readMe = [
   },
   {
     type: "input",
-    message: "What are the steps required to install your project?",
-    name: "usage",
+    message: "What is the command to run the application?",
+    name: "installation",
   },
   {
     type: "input",
-    message:
-      "Provide the screenshot file name here, must be in ./assets/img/ :",
-    name: "screenshot",
+    message: "How do you use the application?",
+    name: "usage",
   },
   {
     type: "input",
@@ -56,19 +55,28 @@ function init() {
         answers.projectName
       );
 
-      const projectDescription = generateMarkdown.renderDescriptionSection(
+      const description = generateMarkdown.renderDescriptionSection(
         answers.description
       );
+
+      const tableOfContents = generateMarkdown.renderTableOfContents();
+
       const usage = generateMarkdown.renderUsageSection(answers.usage);
-      const screenshot = generateMarkdown.renderScreenShotSection(
-        answers.screenShot
+      const installation = generateMarkdown.renderInstallationSection(
+        answers.installation
       );
+
+      //   const screenShot = generateMarkdown.renderScreenShotSection(
+      //     answers.screenShot
+      //   );
       const credits = generateMarkdown.renderCreditsSection(answers.credits);
       const license = generateMarkdown.renderLicenseSection(answers.license[0]);
 
       //Concat markup from template literals
-      const readMeString = `${projectName}${projectDescription}${installation}${screenShot}${credits}${license}`;
 
+      const readMeString = `${projectName} ${description} ${tableOfContents} ${installation} ${usage} ${credits} ${license}`;
+      console.log("This is the readMeString:  " + readMeString);
+      //const readMeString = `${projectName}${description}${tableOfContents}${usage}${screenShot}${credits}${license}`;
       //console.log(readMeString);
 
       fs.writeFile("READMETEST.md", readMeString, (err) =>
