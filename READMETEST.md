@@ -1,6 +1,7 @@
 # PROJECT NAME: asdfasdf
+ ![GNUGPLv3](https://img.shields.io/badge/LICENSE-GNUGPLv3-BLUE) 
  ## DESCRIPTION: 
-asdfasdf
+asdf
  ## TABLE OF CONTENTS
 
 - [Installation](#INSTALLATION)
@@ -12,18 +13,17 @@ asdfasdf
 - [License](#LICENSE)
 
  ## INSTALLATION: 
-asdfasdf
+asdf
  ## USAGE: 
-asdfasdf
+asdf
  ## CREDITS: 
- asdfasdf 
-   
- ## LICENSE: ![MIT](https://img.shields.io/badge/LICENSE-MIT-BLUE) 
- 
+ asdf 
   
-   
-      MIT License
+  ## LICENSE: 
 
-      Copyright (c) [2021] [Jon Gregory]
+      GNU GENERAL PUBLIC LICENSE
 
-      
+      Version 3, 29 June 2007
+
+
+      Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>  Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.

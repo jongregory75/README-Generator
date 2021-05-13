@@ -40,6 +40,16 @@ const readMe = [
     choices: licenseArr,
     message: "Please choose a license under which this code falls:",
   },
+  {
+    type: "input",
+    message: "Please enter your email:",
+    name: "email",
+  },
+  {
+    type: "input",
+    message: "Please enter your github username:",
+    name: "github",
+  },
 ];
 
 function init() {
@@ -51,8 +61,12 @@ function init() {
 
       // Initialize readme file variables, will call external generateMarkdown for string manipulation
       //template literals - build out markdown in generateMarkdown.js and return to these template literals
+
       const projectName = generateMarkdown.renderProjectNameSection(
         answers.projectName
+      );
+      const licenseBadge = generateMarkdown.renderLicenseBadge(
+        answers.license[0]
       );
 
       const description = generateMarkdown.renderDescriptionSection(
@@ -74,7 +88,7 @@ function init() {
 
       //Concat markup from template literals
 
-      const readMeString = `${projectName} ${description} ${tableOfContents} ${installation} ${usage} ${credits} ${license}`;
+      const readMeString = `${projectName} ${licenseBadge} ${description} ${tableOfContents} ${installation} ${usage} ${credits} ${license}`;
       console.log("This is the readMeString:  " + readMeString);
       //const readMeString = `${projectName}${description}${tableOfContents}${usage}${screenShot}${credits}${license}`;
       //console.log(readMeString);

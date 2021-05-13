@@ -2,7 +2,7 @@ const { createPromptModule } = require("inquirer");
 
 //Badge function that returns a license badge based on which license is passed in
 function renderLicenseBadge(license) {
-  licenseBadge = `## LICENSE: ![${license}](https://img.shields.io/badge/LICENSE-${license}-BLUE) \n`;
+  licenseBadge = `![${license}](https://img.shields.io/badge/LICENSE-${license}-BLUE) \n`;
   return licenseBadge;
 }
 
@@ -10,7 +10,7 @@ function renderLicenseBadge(license) {
 function renderLicenseLink(licenseName) {
   switch (licenseName) {
     case "MIT": {
-      let licenseLink = ` \n   
+      let licenseLink = `## LICENSE:  \n   
       MIT License\n
       Copyright (c) [2021] [Jon Gregory]\n
       `;
@@ -18,17 +18,16 @@ function renderLicenseLink(licenseName) {
       break;
     }
     case "GNUGPLv3": {
-      let licenseLink = ` \n
+      let licenseLink = ` ## LICENSE: \n
       GNU GENERAL PUBLIC LICENSE\n
       Version 3, 29 June 2007\n
 
       Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>  Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.`;
       return licenseLink;
-      console.log(licenseLink);
       break;
     }
     case "ISC": {
-      let licenseLink = ` \n
+      let licenseLink = `## LICENSE:  \n
       ISC License\n
       Copyright (c) [2021], [Jon Gregory] \n`;
       return licenseLink;
@@ -45,13 +44,10 @@ function renderLicenseLink(licenseName) {
 // Returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-  //renders the license badge image
-  licenseBadge = renderLicenseBadge(license);
-
   //making it to here. not returning the link info
   licenseLink = renderLicenseLink(license);
 
-  license = ` \n ${licenseBadge} \n ${licenseLink}`;
+  license = `\n ${licenseLink}`;
   return license;
 }
 
@@ -112,4 +108,5 @@ module.exports = {
   renderUsageSection,
   renderCreditsSection,
   renderScreenShot,
+  renderLicenseBadge,
 };
