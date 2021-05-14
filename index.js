@@ -30,8 +30,7 @@ const readMe = [
   },
   {
     type: "input",
-    message:
-      "Please include any collaborators with links to their Github profile:",
+    message: "Please include any collaborators:",
     name: "credits",
   },
   {
@@ -50,6 +49,11 @@ const readMe = [
     message: "Please enter your github username:",
     name: "github",
   },
+  {
+    type: "input",
+    message: "Please enter any test scripts for the application:",
+    name: "tests",
+  },
 ];
 
 function init() {
@@ -59,7 +63,7 @@ function init() {
     .then((answers) => {
       console.log("Generating in a few seconds");
 
-      // Initialize readme file variables, will call external generateMarkdown for string manipulation
+      // Initialize readme file variables, will call external generateMarkdown functions for string manipulation
       //template literals - build out markdown in generateMarkdown.js and return to these template literals
 
       const projectName = generateMarkdown.renderProjectNameSection(
@@ -76,30 +80,29 @@ function init() {
       const tableOfContents = generateMarkdown.renderTableOfContents();
 
       const usage = generateMarkdown.renderUsageSection(answers.usage);
+
       const installation = generateMarkdown.renderInstallationSection(
         answers.installation
       );
 
-      //   const screenShot = generateMarkdown.renderScreenShotSection(
-      //     answers.screenShot
-      //   );
       const credits = generateMarkdown.renderCreditsSection(answers.credits);
+
       const license = generateMarkdown.renderLicenseSection(answers.license[0]);
 
-      //Concat markup from template literals
+      const tests = generateMarkdown.renderTestsSection(answers.tests);
 
-      const readMeString = `${projectName} ${licenseBadge} ${description} ${tableOfContents} ${installation} ${usage} ${credits} ${license}`;
-      console.log("This is the readMeString:  " + readMeString);
-      //const readMeString = `${projectName}${description}${tableOfContents}${usage}${screenShot}${credits}${license}`;
-      //console.log(readMeString);
-
-      fs.writeFile("READMETEST.md", readMeString, (err) =>
-        err ? console.error(err) : console.log("Success!")
+      const questions = generateMarkdown.renderQuestionsSection(
+        answers.github,
+        answers.email
       );
 
-      // fs.writeFile("READMETEST.md", JSON.stringify(answers), (err) =>
-      //   err ? console.error(err) : console.log("Success!")
-      // );
+      //Concat markup from template literals
+      const readMeString = `${projectName} ${licenseBadge} ${description} ${tableOfContents} ${installation} ${usage} ${credits} ${questions} ${tests} ${license}`;
+      console.log("This is the readMeString:  " + readMeString);
+
+      fs.writeFile("README.md", readMeString, (err) =>
+        err ? console.error(err) : console.log("Success!")
+      );
     })
 
     .catch((error) => {
@@ -111,5 +114,4 @@ function init() {
     });
 }
 
-// Function call to initialize app
 init();
